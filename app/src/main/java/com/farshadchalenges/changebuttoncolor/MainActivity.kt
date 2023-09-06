@@ -9,6 +9,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -52,11 +53,20 @@ fun ChangeColor() {
             val myButtonBackGroundColor = remember {
                 mutableStateOf(Color.Blue)
             }
-            val myButtonContentColor = remember {
+            val myButtonTextColor = remember {
                 mutableStateOf(Color.Black)
             }
             val myBackGroundColor = remember {
-                mutableStateOf(Color.LightGray)
+                mutableStateOf(Color.DarkGray)
+            }
+            val myButtonText = remember {
+                mutableStateOf("Do your Magic")
+            }
+            val myText = remember {
+                mutableStateOf("Show Your message Here")
+            }
+            val myBoolean = remember {
+                mutableStateOf(true)
             }
 
             Column(
@@ -67,22 +77,54 @@ fun ChangeColor() {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
 
+                if (!myBoolean.value){
+                    Text(
+                        text = myText.value,
+                        fontSize = 24.sp,
+                        color = myButtonTextColor.value,
+                        fontFamily = FontFamily.SansSerif,
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.End,
+                        modifier = Modifier
+                            .background(myButtonBackGroundColor.value)
+                    )
+                }
+
+
+                Spacer(modifier = Modifier.size(20.dp))
+
                 Button(
                     onClick = {
-                        myButtonBackGroundColor.value = Color.Red
-                        myButtonContentColor.value = Color.Yellow
-                        myBackGroundColor.value = Color.White
+
+                        if (myBoolean.value){
+                            myButtonBackGroundColor.value = Color.Red
+                            myButtonTextColor.value = Color.Yellow
+                            myBackGroundColor.value = Color.White
+                            myButtonText.value = "You did it"
+                            myText.value = "You Should Finish it!"
+                            myBoolean.value = false
+                        }
+                        else{
+                            myButtonBackGroundColor.value = Color.Blue
+                            myButtonTextColor.value = Color.Black
+                            myBackGroundColor.value = Color.DarkGray
+                            myButtonText.value = "Do Your Magic"
+                            myText.value = "Show your message Here"
+                            myBoolean.value = true
+                        }
+
+
                     },
                     modifier = Modifier.size(250.dp, 100.dp),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = myButtonBackGroundColor.value,
-                        contentColor = myButtonContentColor.value
+                        containerColor = myButtonBackGroundColor.value
                     ),
                     border = BorderStroke(3.dp, Color.DarkGray)
 
                 ) {
                     Text(
-                        text = "Do your Magic",
+                        text = myButtonText.value,
+                        color = myButtonTextColor.value,
                         fontSize = 24.sp,
                         fontFamily = FontFamily.SansSerif,
                         fontWeight = FontWeight.Bold,
