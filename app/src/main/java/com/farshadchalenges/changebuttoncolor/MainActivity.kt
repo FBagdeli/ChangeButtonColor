@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -26,6 +27,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -73,6 +76,9 @@ fun ChangeColor() {
             val myTextFieldValue = remember {
                 mutableStateOf("")
             }
+            val myImage = remember {
+                mutableStateOf(R.drawable.tehran)
+            }
 
             Column(
                 modifier = Modifier
@@ -81,6 +87,17 @@ fun ChangeColor() {
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
+
+
+                Image(
+                    painter = painterResource(id = myImage.value),
+                    contentDescription = "Ocean",
+                    modifier = Modifier.size(300.dp),
+                    contentScale = ContentScale.Fit,
+                    alignment = Alignment.Center
+                )
+
+                Spacer(modifier = Modifier.size(20.dp))
 
                 if (!showOrHide.value) {
                     Text(
@@ -104,6 +121,7 @@ fun ChangeColor() {
                             myButtonTextColor.value = Color.Yellow
                             myBackGroundColor.value = Color.White
                             myButtonText.value = "You did it"
+                            myImage.value = R.drawable.paris
                             showOrHide.value = false
                         } else {
                             myButtonBackGroundColor.value = Color.Blue
@@ -111,6 +129,7 @@ fun ChangeColor() {
                             myBackGroundColor.value = Color.DarkGray
                             myButtonText.value = "Do Your Magic"
                             myTextFieldValue.value = ""
+                            myImage.value = R.drawable.tehran
                             showOrHide.value = true
                         }
 
