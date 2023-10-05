@@ -21,6 +21,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -156,13 +157,12 @@ fun ChangeColor() {
                     onValueChange = {
                         myTextFieldValue.value = it
                     },
-                    label = {
-                        Text(
-                            text = "Enter Your Name",
-                            color = Color.Blue
-                        )
-                    },
+                    label = {Text(text = "Enter Your Name")},
                     modifier = Modifier.width(300.dp),
+                    colors = TextFieldDefaults.textFieldColors(
+                        textColor = Color.Red,
+                        focusedLabelColor = Color.Blue
+                    ),
                     maxLines = 4
                 )
             }
